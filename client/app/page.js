@@ -1,4 +1,5 @@
 "use client";
+import title from "./images/title.png";
 import {useRef, useEffect, useState} from "react";
 
 export default function Home() {
@@ -53,21 +54,28 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="min-h-screen font-sans bg-blue-300">
+        <div className = "flex flex-col items-center justify-center">
       {!code && 
         <>
-          <button onClick={createRoom}>Create room</button>
-          <div>
-            <input placeholder="Room Code" className="bg-white text-blue-600" onChange={(e) => {setCodeInput(e.target.value)}}></input>
-            <button onClick={(joinRoom)}>Join Room</button>
+          <div className = "flex w-screen justify-center">
+          <img className = "mt-2 w-3/4 h-3/4" src={title.src}/>
+          </div>
+          <div className="flex flex-col">
+          <button className="p-1 bg-indigo-500 rounded-md w-32" onClick={createRoom}>Create room</button>
+          <div className="mt-10">
+            <input placeholder="Room Code" className="bg-white text-blue-600 p-1" onChange={(e) => {setCodeInput(e.target.value)}}></input>
+            <button className= "p-1 bg-indigo-500" onClick={(joinRoom)}>Join Room</button>
+          </div>
           </div>
         </>}
 
       {code &&
         <>
-          <h1>{code}</h1>
+          <h1 className="text-xs">{code}</h1>
           <p>Number of players in room: {playersNum}</p>
         </>}
+        </div>
     </div>
   );
 }
