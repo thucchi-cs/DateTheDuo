@@ -10,8 +10,8 @@ export default function Home() {
   // COnnect to server
   useEffect(() => {
     // connect
-    ws.current = new WebSocket("ws://localhost:8080");
-    // ws.current = new WebSocket("wss://something.onrender.com");
+    // ws.current = new WebSocket("ws://localhost:8080");
+    ws.current = new WebSocket("wss://datetheduo.onrender.com/");
 
     // Receiving msgs
     ws.current.onmessage = (event) => {
