@@ -1,20 +1,17 @@
 "use client";
-import {useRef, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
+import getSocket from "./socket";
 
 export default function Home() {
-  const ws = useRef(null);
-  const [code, setCode] = useState(null);
   const [codeInput, setCodeInput] = useState("");
   const [playersNum, setPlayersNum] = useState(0);
+  const [code, setCode] = useState(null);
+  const ws = getSocket();
 
-  // COnnect to server
+  // Socket handling
   useEffect(() => {
-    // connect
-    // ws.current = new WebSocket("ws://localhost:8080");
-    ws.current = new WebSocket("wss://datetheduo.onrender.com/");
-
     // Receiving msgs
-    ws.current.onmessage = (event) => {
+    ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
       // After room is created
@@ -39,17 +36,17 @@ export default function Home() {
       }
     }
 
-    return () => ws.current.close()
+    return () => ws.close()
   }, [])
 
   const createRoom = () => {
     console.log("creating room");
-    ws.current.send(JSON.stringify({type: "create-room"}));
+    ws.send(JSON.stringify({type: "create-room"}));
   }
 
   const joinRoom = () => {
     console.log("joining room");
-    ws.current.send(JSON.stringify({type:"join-room", code:codeInput}));
+    ws.send(JSON.stringify({type:"join-room", code:codeInput}));
   }
 
   return (
