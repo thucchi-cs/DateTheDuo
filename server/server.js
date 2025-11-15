@@ -71,4 +71,4 @@ wss.on("connection", (socket) => {
 
 // Open server
 const PORT = process.env.PORT || 8080;
-server.listen(PORT);
+server.listen(PORT, "0.0.0.0");
