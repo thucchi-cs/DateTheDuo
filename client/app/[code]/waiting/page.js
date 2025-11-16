@@ -57,7 +57,7 @@ export default function waitingRoom() {
 
     return (
         <div className = "flex flex-col max-w-screen min-h-screen justify-center items-center bg-blue-300">
-            <p>Code: {code}</p>
+            <p className="text-sm font-[Silkscreen]">Code: {code}</p>
             <button className = "pl-10 pr-10 p-2 rounded-md bg-indigo-600 mt-20 mb-25 text-5xl">Start!</button>
             <div className = "flex row-span-2 max-w-screen justify-center px-10">
                 {players.map((item, index) => (
