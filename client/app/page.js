@@ -72,8 +72,8 @@ export default function Home() {
 
       {code &&
         <>
-          <h1 className="text-xs">{code}</h1>
-          <p>Number of players in room: {playersNum}</p>
+          <h1 className="text-sm font-[Silkscreen]">{code}</h1>
+          <p className="text-sm font-[Silkscreen]"> Number of players in room: {playersNum}</p>
         </>}
         </div>
     </div>
