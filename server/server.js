@@ -93,6 +93,79 @@ wss.on("connection", (socket) => {
                 s.send(JSON.stringify({type:"update-players", players:[...session[socket.code]], num:session[socket.code].size}));
             }
         }
+        // Start game from waiting room
+        else if (type === "start") {
+            console.log("starting")
+            for (const s of session[socket.code]) {
+                s.buzzed = false;
+                s.buzzing = false;
+                s.score = 0;
+                s.send(JSON.stringify({type:"started"}));
+            }
+        }
+        // Randomize question
+        else if (type === "set-question") {
+            const allowed = [];
+            const excluded = new Set(data.questioned)
+            for (let i=0; i<data.len; i++) {
+                if (!excluded.has(i)) {
+                    allowed.push(i);
+                }
+            }
+            const randomized = allowed[Math.floor(Math.random() * allowed.length)];
+            
+            for (const s of session[socket.code]) {
+                s.buzzed = false;
+                s.buzzing = false;
+            }
+
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type: "question-set", qNum: randomized}));
+                s.send(JSON.stringify({type: "stage-changed", stage:"question"}));
+                s.send(JSON.stringify({type:"update-players", players:[...session[socket.code]], num:session[socket.code].size}));
+            }
+        }
+        // Player buzz
+        else if (type === "buzz") {
+            socket.buzzing = true;
+            socket.buzzed = true;
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type: "buzzed"}));
+                s.send(JSON.stringify({type:"update-players", players:[...session[socket.code]], num:session[socket.code].size}));
+            }
+        }
+        // Player answer
+        else if (type === "answer") {
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type:"answered", ans:data.ans, correct:data.correct}));
+                s.send(JSON.stringify({type:"stage-changed", stage:"answered"}));
+            }
+        }
+        // Duo react to answer
+        else if (type === "react") {
+            let end = true;
+            for (const s of session[socket.code]) {
+                s.buzzing = false;
+                end = end && s.buzzed;
+            }
+            let duo;
+            if (data.correct) {
+                duo = Math.floor(Math.random() * 3);
+            } else {
+                duo = -1;
+            }
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type:"reacted", end:end||data.correct, duo:duo}));
+                s.send(JSON.stringify({type:"stage-changed", stage:"reaction"}));
+                s.send(JSON.stringify({type:"update-players", players:[...session[socket.code]], num:session[socket.code].size}));
+            }
+        }
+        // Change state
+        else if (type === "set-stage") {
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type:"stage-changed", stage:data.stage}));
+            }
+        }
 
     })
 

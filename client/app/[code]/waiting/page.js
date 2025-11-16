@@ -1,6 +1,6 @@
 "use client";
 import {useEffect, useState} from "react";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import getSocket from "../../socket";
 import cat1 from "../../images/cat1.png";
 import cat2 from "../../images/cat2.png";
@@ -35,6 +35,9 @@ export default function waitingRoom() {
             else if (data.type === "get-id") {
                 setPlayerID(data.id);
             }
+            else if (data.type === "started") {
+                redirect(`/${code}/game`);
+            }
         }
         
         return () => ws.onmessage = null;
@@ -55,10 +58,14 @@ export default function waitingRoom() {
         ws.send(JSON.stringify({type:"edit-name", name:name}));
     }
 
+    const startGame = () => {
+        ws.send(JSON.stringify({type:"start"}));
+    }
+
     return (
         <div className = "flex flex-col max-w-screen min-h-screen justify-center items-center bg-blue-300">
             <p className="text-sm font-[Silkscreen]">Code: {code}</p>
-            <button className = "pl-10 pr-10 p-2 rounded-md bg-indigo-600 mt-20 mb-25 text-5xl">Start!</button>
+            <button className = "pl-10 pr-10 p-2 rounded-md bg-indigo-600 mt-20 mb-25 text-5xl" onClick={startGame}>Start!</button>
             <div className = "flex row-span-2 max-w-screen justify-center px-10">
                 {players.map((item, index) => (
                     <div key={index} className = "w-max flex flex-col text-center items-center">
