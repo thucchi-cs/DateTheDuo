@@ -1,8 +1,25 @@
 "use client";
 import { useState, useEffect } from "react";
+import angryDuo from "../../images/angryDuo.png";
+import chadDuo from "../../images/chadDuo.png";
+import dateDuo from "../../images/dateDuo.png";
+import fancyDuo from "../../images/fancyDuo.png";
+import inloveDuo from "../../images/inloveDuo.png";
+import wowzaDuo from "../../images/wowzaDuo.png";
+import stage from "../../images/stage.png";
+import introScreen from "../../images/introScreen.png";
+import questionBank from '../../images/questionBank.png';
+import spotlight from '../../images/spotlight.png';
+import buzzer from '../../images/buzzer.png';
+import cat1 from "../../images/cat1.png";
+import cat2 from "../../images/cat2.png";
+import cat3 from "../../images/cat3.png";
+import cat4 from "../../images/cat4.png";
 import getSocket from "@/app/socket";
 
 export default function game() {
+    const images = [cat1.src, cat2.src, cat3.src, cat4.src];
+
     const quetionSet = [
         {q: "What is the study of language?", a: ["linguistics"]},
         {q: "What U.S. university founded Duolingo?", a: ["carnegie mellon university", "carnegie mellon", "cmu"]},
@@ -17,7 +34,7 @@ export default function game() {
         {q: "Which chess piece can move diagonally?", a: ["bishop", "bishops"]},
         {q: "Rogers is the last name of which Scooby-Doo character?", a: ["shaggy"]},
         {q: "Vanessa Hudgens plays which character in High School Musical?", a: ["gabriella montez", "gabriella"]},
-        {q: "Duolingo has over 70 million daily users. true/false", a: ["true"]},
+        {q: "Duolingo has over 70 million daily users. true/false", a: ["true"]}
     ]
 
     const [stage, setStage] = useState("intro");
@@ -100,21 +117,74 @@ export default function game() {
     return (
         <div>
             {(stage=== "intro") &&
-                <div>
-                    introing
-                    <button onClick={newQuestion}>next</button>
+                <div className= "relative">
+                    <img className="absolute z-0 w-screen h-screen object-cover" src={introScreen.src}></img>
+                    <button className ="absolute font-[Silkscreen] p-1 rounded w-fit bg-indigo-600 z-20 text-5xl ml-50 mt-140 transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
                 </div>
             }
             {(stage === "question") &&
-                <div>questioning
-                    <div>
-                        <p>#{questioned.length}</p>
-                        <p>{quetionSet[question].q}</p>
-                        <button onClick={newQuestion}>New q</button>
+                <div>
+                    <div className="absolute">
+                        <img className="w-screen h-screen object-cover z-100" src={questionBank.src}></img>
                     </div>
-
+                    <div className ="relative">
+                    
+                        <p className="absolute top-0 left-0 mt-50 invisible">#{questioned.length}</p>
+                        <p className = "absolute top-50 left-70 font-[Silkscreen] text-5xl mr-40">{quetionSet[question].q}</p>
+                    </div>
                     <div>
-                        {players.map((item,index) => (
+                        <div className = "flex row-span-2 max-w-screen justify-center px-10">
+                            {players.map((item, index) => (
+                                <div key={index} className = "w-max flex flex-col text-center font-[Silkscreen] text-3xl items-center">
+                                    <img className = "mt-2" src={images[index]}/>
+                                    
+
+                                    {!answering &&
+                                        <>
+                                            {item.buzzed &&
+                                                <div className="flex flex-row items-center  mt-80">
+                                                    <p className="text-center p-1 w-fit mr-5 text-gray-100 z-100">{item.name}</p>
+                                                </div>                                            }
+                                            {!item.buzzed &&
+                                                <div>
+                                                    <div className="flex flex-row items-center mt-80">
+                                                        <p className="text-center p-1 w-fit z-100">{item.name}</p>
+                                                    </div> 
+                                                    {item.id === playerID &&
+                                                        <div className="relative">
+                                                            <img className="w-[10vw]" src={buzzer.src} onClick={buzz} />
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                        </>
+                                    }
+                                    {answering &&
+                                        <>
+                                            {item.buzzing &&
+                                                <div>
+                                                    <div className="flex flex-row items-center mt-80">
+                                                        <p className="text-center p-1 w-fit z-100">{item.name}</p>
+                                                    </div> 
+                                                    {item.id === playerID &&
+                                                        <div className="relative flex flex-column">
+                                                            <input className="text-center p-1 w-[20vw]" placeholder="Answer..." onChange={(e) => {setAnswer(e.target.value)}}></input>
+                                                            <button onClick={sendAnswer}>submit</button>                                                        
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                            {!item.buzzing &&
+                                                <div className="flex flex-row items-center  mt-80">
+                                                    <p className="text-center p-1 w-fit mr-5 text-gray-100 z-100">{item.name}</p>
+                                                </div>  
+                                            }
+                                        </>
+                                    }
+                                    </div>
+                                ))}
+                        </div>
+                        {/* {players.map((item,index) => (
                             <div key={index}>
                                 {!answering &&
                                     <>
@@ -125,7 +195,10 @@ export default function game() {
                                             <div>
                                                 <p>{item.name}</p>
                                                 {item.id === playerID &&
-                                                    <button onClick={buzz}>:btn:</button>
+                                                <div className="relative">
+                                                    <img className="" src={buzzer.src} />
+                                                    <button onClick={buzz}>M/:btn:</button>
+                                                </div>
                                                 }
                                             </div>
                                         }
@@ -150,8 +223,9 @@ export default function game() {
                                     </>
                                 }
                             </div>
-                        ))}
+                        ))} */}
                     </div>
+
                 </div>
             }
             {(stage === "answered") &&
