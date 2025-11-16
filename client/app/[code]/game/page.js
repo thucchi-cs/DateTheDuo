@@ -19,6 +19,7 @@ import getSocket from "@/app/socket";
 
 export default function game() {
     const images = [cat1.src, cat2.src, cat3.src, cat4.src];
+    const duos = [angryDuo, chadDuo, inloveDuo, wowzaDuo];
 
     const quetionSet = [
         {q: "What is the study of language?", a: ["linguistics"]},
@@ -184,46 +185,6 @@ export default function game() {
                                     </div>
                                 ))}
                         </div>
-                        {/* {players.map((item,index) => (
-                            <div key={index}>
-                                {!answering &&
-                                    <>
-                                        {item.buzzed &&
-                                            <p className="text-red-600">{item.name}</p>
-                                        }
-                                        {!item.buzzed &&
-                                            <div>
-                                                <p>{item.name}</p>
-                                                {item.id === playerID &&
-                                                <div className="relative">
-                                                    <img className="" src={buzzer.src} />
-                                                    <button onClick={buzz}>M/:btn:</button>
-                                                </div>
-                                                }
-                                            </div>
-                                        }
-                                    </>
-                                }
-                                {answering &&
-                                     <>
-                                        {item.buzzing &&
-                                            <div>
-                                                <p>{item.name}</p>
-                                                {item.id === playerID &&
-                                                    <div>
-                                                        <input placeholder="Answer..." onChange={(e) => {setAnswer(e.target.value)}}></input>
-                                                        <button onClick={sendAnswer}>submit</button>
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                        {!item.buzzing &&
-                                            <p className="text-red-600">{item.name}</p>
-                                        }
-                                    </>
-                                }
-                            </div>
-                        ))} */}
                     </div>
 
                 </div>
@@ -240,23 +201,26 @@ export default function game() {
                 </div>
             }
             {(stage === "reaction") &&
-                <div>reacting
-                    <p>Duo: {duo}</p>
-                    {questioned.length < 10 &&
-                        <>
-                            {end && 
-                                <button onClick={newQuestion}>Next</button>
-                            }
-                            {!end &&
-                                <button onClick={resetQ}>Next</button>
-                            }
-                        </>
-                    }
-                    {questioned.length >= 10 &&
-                        <>
-                            <button>Finish</button>
-                        </>
-                    }
+                <div>
+                    <div className= "relative">
+                        <img className="absolute z-0 w-screen h-screen object-cover" src={spotlight.src}></img>
+                        <img className="relative z-100 w-[45vw] t-15 ml-[55vw]" src={duos[duo+1].src}></img>
+                        {questioned.length < 10 &&
+                            <>
+                                {end && 
+                                    <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next</button>
+                                }
+                                {!end &&
+                                    <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={resetQ}>Next</button>
+                                }
+                            </>
+                        }
+                        {questioned.length >= 10 &&
+                            <>
+                                <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x">Finish</button>
+                            </>
+                        }
+                    </div>
 
                 </div>
             }
