@@ -15,7 +15,7 @@ export default function Home(){
             <input className="text-center p-1 border rounded w-fit mr-5"></input>
             </div>
             <div className = "w-max flex flex-col text-center items-center">
-            <img className = "mt-2" src={cat2.src}/>
+                <img className = "mt-2" src={cat2.src}/>
             <input className="text-center p-1 border rounded w-fit"></input>
             </div>
             <div className = "w-max flex flex-col text-center items-center">
