@@ -184,60 +184,21 @@ export default function game() {
                                     </div>
                                 ))}
                         </div>
-                        {/* {players.map((item,index) => (
-                            <div key={index}>
-                                {!answering &&
-                                    <>
-                                        {item.buzzed &&
-                                            <p className="text-red-600">{item.name}</p>
-                                        }
-                                        {!item.buzzed &&
-                                            <div>
-                                                <p>{item.name}</p>
-                                                {item.id === playerID &&
-                                                <div className="relative">
-                                                    <img className="" src={buzzer.src} />
-                                                    <button onClick={buzz}>M/:btn:</button>
-                                                </div>
-                                                }
-                                            </div>
-                                        }
-                                    </>
-                                }
-                                {answering &&
-                                     <>
-                                        {item.buzzing &&
-                                            <div>
-                                                <p>{item.name}</p>
-                                                {item.id === playerID &&
-                                                    <div>
-                                                        <input placeholder="Answer..." onChange={(e) => {setAnswer(e.target.value)}}></input>
-                                                        <button onClick={sendAnswer}>submit</button>
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                        {!item.buzzing &&
-                                            <p className="text-red-600">{item.name}</p>
-                                        }
-                                    </>
-                                }
-                            </div>
-                        ))} */}
                     </div>
 
                 </div>
             }
             {(stage === "answered") &&
-                <div className="relative">answered:
+                <div className="relative">
                     <img className="w-screen h-screen object-cover z-10" src={questionBank.src} ></img>
+                    <p className="absolute font-[Silkscreen] text-white text-5xl top-40 left-130">answered:</p>
                     {correct &&
-                        <p className="absolute font-[Silkscreen] text-green-600 text-8xl top-70 left-160">{answered}</p>
+                        <p className="absolute font-[Silkscreen] text-green-600 text-8xl top-60 left-130">{answered}</p>
                     }
                     {!correct &&
-                        <p className="absolute font-[Silkscreen] text-red-600 text-8xl top-70 left-160">{answered}</p>
+                        <p className="absolute font-[Silkscreen] text-red-600 text-8xl top-60 left-130">{answered}</p>
                     }
-                    <button className ="absolute font-[Silkscreen] bottom-40 right-165 p-1 rounded w-fit bg-indigo-600 z-20 text-9xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
+                    <button className ="absolute font-[Silkscreen] bottom-40 right-165 p-1 rounded w-fit bg-indigo-600 z-20 text-9xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={react}>Next!</button>
                 </div>
             }
             {(stage === "reaction") &&
