@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 export default function game() {
     const images = ["/images/cat1.png", "/images/cat2.png", "/images/cat3.png", "/images/cat4.png"];
-    const duos = ["/images/angryDuo.png", "/images/chadDuo.png", "/images/inloveDuo.png", "/images/wowzaDuo.png"];
+    const duos = ["/images/angryDuo.PNG", "/images/chadDuo.png", "/images/inloveDuo.PNG", "/images/wowzaDuo.PNG"];
 
     const quetionSet = [
         {q: "What is the study of language?", a: ["linguistics"]},
