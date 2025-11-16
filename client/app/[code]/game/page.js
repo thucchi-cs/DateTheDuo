@@ -204,7 +204,7 @@ export default function game() {
                 <div>
                     <div className= "relative">
                         <img className="absolute z-0 w-screen h-screen object-cover" src={"/images/spotlight.png"}></img>
-                        <img className="relative z-100 w-[45vw] t-15 ml-[55vw]" src={duos[duo+1].src}></img>
+                        <img className="relative z-100 w-[45vw] t-15 ml-[55vw]" src={duos[duo+1]}></img>
                         {questioned.length < 10 &&
                             <>
                                 {end && 
