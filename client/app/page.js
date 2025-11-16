@@ -59,7 +59,7 @@ export default function Home() {
       {!code && 
         <>
           <div className = "flex w-screen justify-center">
-          <img className = "mt-2 w-1/2 h-1/2" src={title.src}/>
+          <img className = "mt-2 w-5/12 h-5/12" src={title.src}/>
           </div>
           <div className="flex flex-col justify-center">
           <button className="p-1 bg-indigo-500 rounded-md w-32 ml-20" onClick={createRoom}>Create room</button>
