@@ -17,7 +17,7 @@ export default function game() {
         {q: "Which chess piece can move diagonally?", a: ["bishop", "bishops"]},
         {q: "Rogers is the last name of which Scooby-Doo character?", a: ["shaggy"]},
         {q: "Vanessa Hudgens plays which character in High School Musical?", a: ["gabriella montez", "gabriella"]},
-        {q: "Duolingo has over 70 million daily users. true/false", a: ["true"]},
+        {q: "Duolingo has over 70 million daily users. true/false", a: ["false"]},
     ]
 
     const [stage, setStage] = useState("intro");
