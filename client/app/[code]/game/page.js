@@ -16,6 +16,8 @@ import cat2 from "../../images/cat2.png";
 import cat3 from "../../images/cat3.png";
 import cat4 from "../../images/cat4.png";
 import getSocket from "@/app/socket";
+import { redirect } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function game() {
     const images = [cat1.src, cat2.src, cat3.src, cat4.src];
@@ -35,8 +37,12 @@ export default function game() {
         {q: "Which chess piece can move diagonally?", a: ["bishop", "bishops"]},
         {q: "Rogers is the last name of which Scooby-Doo character?", a: ["shaggy"]},
         {q: "Vanessa Hudgens plays which character in High School Musical?", a: ["gabriella montez", "gabriella"]},
-        {q: "Duolingo has over 70 million daily users. true/false", a: ["true"]}
+        {q: "Duolingo has over 70 million daily users. true/false", a: ["false"]},
     ]
+
+    // Get url params
+    const params = useParams();
+    const {code} = params;
 
     const [stage, setStage] = useState("intro");
     const [question, setQuestion] = useState(null);
@@ -83,6 +89,9 @@ export default function game() {
                 setAnswering(false);
                 setAnswer("");
             }
+            else if (data.type === "ended-all") {
+                redirect(`/${code}/ending`);
+            }
         }
 
         return () => ws.onmessage = null;
@@ -113,6 +122,10 @@ export default function game() {
 
     const resetQ = () => {
         ws.send(JSON.stringify({type:"set-stage", stage:"question"}));
+    }
+
+    const endAll = () => {
+        ws.send(JSON.stringify({type:"end-all"}));
     }
 
     return (
@@ -217,8 +230,13 @@ export default function game() {
                         }
                         {questioned.length >= 10 &&
                             <>
-                                <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x">Finish</button>
-                            </>
+                                {end && 
+                                    <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={endAll}>Finish</button>
+                                }
+                                {!end &&
+                                    <button className ="absolute font-[Silkscreen] p-1 ml-15 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={resetQ}>Next</button>
+                                }
+                        </>
                         }
                     </div>
 
