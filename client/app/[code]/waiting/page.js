@@ -6,6 +6,8 @@ import cat1 from "../../images/cat1.png";
 import cat2 from "../../images/cat2.png";
 import cat3 from "../../images/cat3.png";
 import cat4 from "../../images/cat4.png";
+import edit from "../../images/icon.png";
+
 
 export default function waitingRoom() {
     // Get url params
@@ -64,15 +66,16 @@ export default function waitingRoom() {
 
     return (
         <div className = "flex flex-col max-w-screen min-h-screen justify-center items-center bg-blue-300">
-            <p className="text-sm font-[Silkscreen]">Code: {code}</p>
-            <button className = "pl-10 pr-10 p-2 rounded-md bg-indigo-600 mt-20 mb-25 text-5xl" onClick={startGame}>Start!</button>
+            <p className="font-[Silkscreen] text-6xl">Code: {code}</p>
+            <button className = "pl-10 pr-10 p-2 rounded-md bg-indigo-600 mt-20 mb-24 font-[Silkscreen] text-7xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-xl" onClick={startGame}>Start!</button>
             <div className = "flex row-span-2 max-w-screen justify-center px-10">
                 {players.map((item, index) => (
-                    <div key={index} className = "w-max flex flex-col text-center items-center">
+                    <div key={index} className = "w-max flex flex-col text-center font-[Silkscreen] text-3xl items-center">
                         <img className = "mt-2" src={images[index]}/>
+                        <div className="flex flex-row items-center">
                         {(editName && (item.id === playerID)) &&
                             <>  
-                                <input className="text-center p-1 border rounded w-fit mr-5" value={name} onChange={(e) => {setName(e.target.value)}}></input>
+                                <input className="text-center text-3xl p-1 border rounded w-fit mr-5 font-[Silkscreen]" value={name} onChange={(e) => {setName(e.target.value)}}></input>
                                 <button onClick={saveName}>✓</button>
                             </>
                         }
@@ -80,10 +83,11 @@ export default function waitingRoom() {
                             <>
                                 <p className="text-center p-1 w-fit mr-5">{item.name}</p>
                                 {item.id === playerID && 
-                                    <button onClick={openEditName}>:edit:</button>
+                                    <button onClick={openEditName}><img className="w-5 h-5 font-[Silkscreen] rounded w-fit" src={edit.src}></img></button>
                                 }
                             </>
                         }
+                        </div>
                     </div>
                 ))}
             </div>        
