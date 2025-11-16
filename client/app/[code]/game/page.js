@@ -229,14 +229,15 @@ export default function game() {
                 </div>
             }
             {(stage === "answered") &&
-                <div>answered:
+                <div className="relative">answered:
+                    <img className="w-screen h-screen object-cover z-10" src={questionBank.src} ></img>
                     {correct &&
-                        <p className="text-green-600">{answered}</p>
+                        <p className="absolute font-[Silkscreen] text-green-600 text-8xl top-70 left-160">{answered}</p>
                     }
                     {!correct &&
-                        <p className="text-red-600">{answered}</p>
+                        <p className="absolute font-[Silkscreen] text-red-600 text-8xl top-70 left-160">{answered}</p>
                     }
-                    <button onClick={react}>Next</button>
+                    <button className ="absolute font-[Silkscreen] p-1 rounded w-fit bg-indigo-600 z-20 text-2xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
                 </div>
             }
             {(stage === "reaction") &&
