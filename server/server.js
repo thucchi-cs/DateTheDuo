@@ -28,6 +28,7 @@ wss.on("connection", (socket) => {
             session[code] = new Set([socket]);
             socket.code = code;
             socket.id = session[code].size;
+            socket.name = `Player ${socket.id}`;
 
             // Send to client
             socket.send(JSON.stringify({type: "created", code: code, num: session[code].size}))
@@ -44,6 +45,7 @@ wss.on("connection", (socket) => {
                     session[code].add(socket);
                     socket.code = code;
                     socket.id = session[code].size;
+                    socket.name = `Player ${socket.id}`;
     
                     socket.send(JSON.stringify({type: "joined", code: code, num: session[code].size}));
     
@@ -82,6 +84,13 @@ wss.on("connection", (socket) => {
             // Errored not in room
             else {
                 socket.send(JSON.stringify({type:"error", msg: "Player not in room"}));
+            }
+        }
+        // Change player's name
+        else if (type === "edit-name") {
+            socket.name = data.name;
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type:"update-players", players:[...session[socket.code]], num:session[socket.code].size}));
             }
         }
 

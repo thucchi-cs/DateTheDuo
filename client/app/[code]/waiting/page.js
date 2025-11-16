@@ -12,6 +12,8 @@ export default function waitingRoom() {
     const [playersNum, setPlayersNum] = useState(0);
     const [playerID, setPlayerID] = useState(null);
     const [players, setPlayers] = useState([]);
+    const [editName, setEditName] = useState(false);
+    const [name, setName] = useState("");
     
     useEffect(() => {
         ws.onmessage = (event) => {
@@ -32,9 +34,20 @@ export default function waitingRoom() {
         
         return () => ws.onmessage = null;
     }, []);
+
     if (!playerID) {
         ws.send(JSON.stringify({type:"get-players"}));
         ws.send(JSON.stringify({type:"get-player-id"}));
+    }
+
+    const openEditName = () => {
+        setEditName(true);
+        setName(players[playerID-1].name);
+    }
+
+    const saveName = () => {
+        setEditName(false);
+        ws.send(JSON.stringify({type:"edit-name", name:name}));
     }
 
     return (
@@ -45,7 +58,22 @@ export default function waitingRoom() {
             <p>Number of players: {playersNum}</p>
             <p>Player ID: {playerID}</p>
             {players.map((item, index) => (
-                <li key={index}>player {item.id}</li>
+                <div key={index}>
+                    {(editName && (item.id === playerID)) &&
+                        <>  
+                            <input className="bg-white text-blue-800" value={name} onChange={(e) => {setName(e.target.value)}}></input>
+                            <button onClick={saveName}>✓</button>
+                        </>
+                    }
+                    {!(editName && (item.id === playerID)) &&
+                        <>
+                            <p>{item.name}</p>
+                            {item.id === playerID && 
+                                <button onClick={openEditName}>:edit:</button>
+                            }
+                        </>
+                    }
+                </div>
             ))}
         </>
     )

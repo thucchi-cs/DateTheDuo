@@ -8,8 +8,8 @@ export default function getSocket() {
     }
 
     // connect
-    // ws = new WebSocket("ws://localhost:8080");
-    ws = new WebSocket("wss://datetheduo.onrender.com/");
+    ws = new WebSocket("ws://localhost:8080");
+    // ws = new WebSocket("wss://datetheduo.onrender.com/");
     console.log("hi")
 
     return ws;
