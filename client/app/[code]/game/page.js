@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import getSocket from "@/app/socket";
+import { redirect } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function game() {
     const quetionSet = [
@@ -19,6 +21,10 @@ export default function game() {
         {q: "Vanessa Hudgens plays which character in High School Musical?", a: ["gabriella montez", "gabriella"]},
         {q: "Duolingo has over 70 million daily users. true/false", a: ["false"]},
     ]
+
+    // Get url params
+    const params = useParams();
+    const {code} = params;
 
     const [stage, setStage] = useState("intro");
     const [question, setQuestion] = useState(null);
@@ -65,6 +71,9 @@ export default function game() {
                 setAnswering(false);
                 setAnswer("");
             }
+            else if (data.type === "ended-all") {
+                redirect(`/${code}/ending`);
+            }
         }
 
         return () => ws.onmessage = null;
@@ -95,6 +104,10 @@ export default function game() {
 
     const resetQ = () => {
         ws.send(JSON.stringify({type:"set-stage", stage:"question"}));
+    }
+
+    const endAll = () => {
+        ws.send(JSON.stringify({type:"end-all"}));
     }
 
     return (
@@ -180,7 +193,12 @@ export default function game() {
                     }
                     {questioned.length >= 10 &&
                         <>
-                            <button>Finish</button>
+                        {end && 
+                            <button onClick={endAll}>Finish</button>
+                        }
+                        {!end &&
+                            <button onClick={resetQ}>Next</button>
+                        }
                         </>
                     }
 

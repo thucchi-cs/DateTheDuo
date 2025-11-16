@@ -136,6 +136,17 @@ wss.on("connection", (socket) => {
         }
         // Player answer
         else if (type === "answer") {
+            if (data.correct) {
+                let buzzed = 0;
+                for(const s of session[socket.code]) {
+                    if (s.buzzed) {
+                        buzzed++;
+                    }
+                }
+                socket.score += 40 - 10*buzzed;
+            } else{
+                socket.score -= 5;
+            }
             for (const s of session[socket.code]) {
                 s.send(JSON.stringify({type:"answered", ans:data.ans, correct:data.correct}));
                 s.send(JSON.stringify({type:"stage-changed", stage:"answered"}));
@@ -165,6 +176,25 @@ wss.on("connection", (socket) => {
             for (const s of session[socket.code]) {
                 s.send(JSON.stringify({type:"stage-changed", stage:data.stage}));
             }
+        }
+        // Finish game
+        else if (type === "end-all") {
+            for (const s of session[socket.code]) {
+                s.send(JSON.stringify({type:"ended-all"}));
+            }
+        }
+        // Find winner
+        else if (type === "get-winner") {
+            let max = -400;
+            let winner = 0;
+            for (const s of session[socket.code]) {
+                if (s.score > max) {
+                    max = s.score;
+                    winner = s.id;
+                }
+            }
+
+            socket.send(JSON.stringify({type:"winner", winner:winner}));
         }
 
     })
