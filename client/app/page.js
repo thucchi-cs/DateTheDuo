@@ -1,5 +1,4 @@
 "use client";
-import title from "./images/title.png";
 import {useEffect, useState} from "react";
 import getSocket from "./socket";
 import { redirect } from "next/navigation";
@@ -50,7 +49,7 @@ export default function Home() {
     <div className="min-h-screen font-sans bg-blue-300">
       <div className = "flex flex-col items-center justify-center">
         <div className = "flex w-screen justify-center">
-          <img className = "mt-2 w-5/12 h-5/12" src={title.src}/>
+          <img className = "mt-2 w-5/12 h-5/12" src={"/images/title.png"}/>
         </div>
         <div className="flex flex-col justify-center">
           <button className="p-1 bg-indigo-500 rounded-md w-32 ml-18 font-[Silkscreen] text-xl" onClick={createRoom}>New Game</button>

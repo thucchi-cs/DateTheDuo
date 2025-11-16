@@ -1,24 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import angryDuo from "../../images/angryDuo.PNG";
-import chadDuo from "../../images/chadDuo.png";
-import inloveDuo from "../../images/inloveDuo.PNG";
-import wowzaDuo from "../../images/wowzaDuo.PNG";
-import introScreen from "../../images/introScreen.png";
-import questionBank from '../../images/questionBank.png';
-import spotlight from '../../images/spotlight.png';
-import buzzer from '../../images/buzzer.png';
-import cat1 from "../../images/cat1.png";
-import cat2 from "../../images/cat2.png";
-import cat3 from "../../images/cat3.png";
-import cat4 from "../../images/cat4.png";
 import getSocket from "@/app/socket";
 import { redirect } from "next/navigation";
 import { useParams } from "next/navigation";
 
 export default function game() {
-    const images = [cat1.src, cat2.src, cat3.src, cat4.src];
-    const duos = [angryDuo, chadDuo, inloveDuo, wowzaDuo];
+    const images = ["/images/cat1.png", "/images/cat2.png", "/images/cat3.png", "/images/cat4.png"];
+    const duos = ["/images/angryDuo.png", "/images/chadDuo.png", "/images/inloveDuo.png", "/images/wowzaDuo.png"];
 
     const quetionSet = [
         {q: "What is the study of language?", a: ["linguistics"]},
@@ -129,14 +117,14 @@ export default function game() {
         <div>
             {(stage=== "intro") &&
                 <div className= "relative">
-                    <img className="absolute z-0 w-screen h-screen object-cover" src={introScreen.src}></img>
+                    <img className="absolute z-0 w-screen h-screen object-cover" src={"/images/introScreen.png"}></img>
                     <button className ="absolute font-[Silkscreen] p-1 rounded w-fit bg-indigo-600 z-20 text-5xl ml-50 mt-140 transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
                 </div>
             }
             {(stage === "question") &&
                 <div>
                     <div className="absolute">
-                        <img className="w-screen h-screen object-cover z-100" src={questionBank.src}></img>
+                        <img className="w-screen h-screen object-cover z-100" src={"/images/questionBank.png"}></img>
                     </div>
                     <div className ="relative">
                     
@@ -163,7 +151,7 @@ export default function game() {
                                                     </div> 
                                                     {item.id === playerID &&
                                                         <div className="relative">
-                                                            <img className="w-[10vw]" src={buzzer.src} onClick={buzz} />
+                                                            <img className="w-[10vw]" src={"/images/buzzer.png"} onClick={buzz} />
                                                         </div>
                                                     }
                                                 </div>
@@ -201,7 +189,7 @@ export default function game() {
             }
             {(stage === "answered") &&
                 <div className="relative">
-                    <img className="w-screen h-screen object-cover z-10" src={questionBank.src} ></img>
+                    <img className="w-screen h-screen object-cover z-10" src={"/images/questionBank.png"} ></img>
                     <p className="absolute font-[Silkscreen] text-white text-5xl top-40 left-130">answered:</p>
                     {correct &&
                         <p className="absolute font-[Silkscreen] text-green-600 text-8xl top-60 left-130">{answered}</p>
@@ -215,7 +203,7 @@ export default function game() {
             {(stage === "reaction") &&
                 <div>
                     <div className= "relative">
-                        <img className="absolute z-0 w-screen h-screen object-cover" src={spotlight.src}></img>
+                        <img className="absolute z-0 w-screen h-screen object-cover" src={"/images/spotlight.png"}></img>
                         <img className="relative z-100 w-[45vw] t-15 ml-[55vw]" src={duos[duo+1].src}></img>
                         {questioned.length < 10 &&
                             <>

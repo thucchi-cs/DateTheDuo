@@ -2,11 +2,6 @@
 import {useEffect, useState} from "react";
 import { redirect, useParams } from "next/navigation";
 import getSocket from "../../socket";
-import cat1 from "../../images/cat1.png";
-import cat2 from "../../images/cat2.png";
-import cat3 from "../../images/cat3.png";
-import cat4 from "../../images/cat4.png";
-import edit from "../../images/icon.png";
 
 
 export default function waitingRoom() {
@@ -20,7 +15,7 @@ export default function waitingRoom() {
     const [players, setPlayers] = useState([]);
     const [editName, setEditName] = useState(false);
     const [name, setName] = useState("");
-    const images = [cat1.src, cat2.src, cat3.src, cat4.src];
+    const images = ["/images/cat1.png", "/images/cat2.png", "/images/cat3.png", "/images/cat4.png"];
     
     useEffect(() => {
         ws.onmessage = (event) => {
@@ -83,7 +78,7 @@ export default function waitingRoom() {
                             <>
                                 <p className="text-center p-1 w-fit mr-5">{item.name}</p>
                                 {item.id === playerID && 
-                                    <button onClick={openEditName}><img className="w-5 h-5 font-[Silkscreen] rounded w-fit" src={edit.src}></img></button>
+                                    <button onClick={openEditName}><img className="w-5 h-5 font-[Silkscreen] rounded w-fit" src={"/images/edit.png"}></img></button>
                                 }
                             </>
                         }

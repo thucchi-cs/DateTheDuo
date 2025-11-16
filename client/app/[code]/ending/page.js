@@ -3,15 +3,9 @@ import ws from "../../socket";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import getSocket from "../../socket";
-import cat1 from "../../images/cat1.png";
-import cat2 from "../../images/cat2.png";
-import cat3 from "../../images/cat3.png";
-import cat4 from "../../images/cat4.png";
-import dateDuo from "../../images/dateDuo.png";
-import spotlight from "../../images/spotlight.png";
 
 export default function ending() {
-    const images = [cat1.src, cat2.src, cat3.src, cat4.src];
+    const images = ["/images/cat1.png", "/images/cat2.png", "/images/cat3.png", "/images/cat4.png"];
     const ws = getSocket();
     const [stage, setStage] = useState("contestant");
     const [playerID, setPlayerID] = useState(null);
@@ -56,13 +50,13 @@ export default function ending() {
             <>
                 <img className ="absolute object-right z-10 right-34 mt-100" src={images[winner]}></img>
                 <p className="absolute text-3xl z-100 mt-[40vh] ml-[10vw] font-[Silkscreen] w-[40vw]">Congratulations, {players[winner].name}! You have won a date!</p>
-                <img className="absolute z-0 w-screen h-screen object-cover" src={spotlight.src}></img>
+                <img className="absolute z-0 w-screen h-screen object-cover" src={"/images/spotlight.png"}></img>
                 <button className="absolute font-[Silkscreen] pl-7 pr-7 p-1 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={nextBtn}>Next!</button>
             </>
             }
             {stage === "duo" &&
             <>
-                <img className=" absolute z-10 w-screen h-screen" src={dateDuo.src}></img>
+                <img className=" absolute z-10 w-screen h-screen" src={"/images/dateDuo.png"}></img>
                 <p className="absolute z-20 w-60 h-20 indent-4 ml-20 mt-30 font-[Silkscreen]">A brain such as yours is something to be cherished! Tonight, we shall wine and dine by candlelight. It's a pleasure to meet you, {players[winner].name} </p>
             </>
             }
