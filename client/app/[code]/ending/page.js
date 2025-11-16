@@ -55,15 +55,15 @@ export default function ending() {
             {stage === "contestant" &&
             <>
                 <img className ="absolute object-right z-10 right-34 mt-100" src={images[winner]}></img>
-                <p>{players[winner].name}</p>
+                <p className="absolute text-3xl z-100 mt-[40vh] ml-[10vw] font-[Silkscreen] w-[40vw]">Congratulations, {players[winner].name}! You have won a date!</p>
                 <img className="absolute z-0 w-screen h-screen object-cover" src={spotlight.src}></img>
-                <button className="absolute font-[Silkscreen] pl-7 pr-7 p-1 right-350 mt-200 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={nextBtn}>Next!</button>
+                <button className="absolute font-[Silkscreen] pl-7 pr-7 p-1 rounded w-fit bg-indigo-600 z-20 text-5xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={nextBtn}>Next!</button>
             </>
             }
             {stage === "duo" &&
             <>
                 <img className=" absolute z-10 w-screen h-screen" src={dateDuo.src}></img>
-                <p className="absolute z-20 w-60 h-20 indent-4 ml-20 mt-30 font-[Silkscreen]">A brain such as yours is something to be cherished! Tonight, we shall wine and dine by candlelight. It's a pleasure to meet you, </p>
+                <p className="absolute z-20 w-60 h-20 indent-4 ml-20 mt-30 font-[Silkscreen]">A brain such as yours is something to be cherished! Tonight, we shall wine and dine by candlelight. It's a pleasure to meet you, {players[winner].name} </p>
             </>
             }
 
