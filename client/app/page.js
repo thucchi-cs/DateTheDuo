@@ -53,9 +53,9 @@ export default function Home() {
           <img className = "mt-2 w-5/12 h-5/12" src={title.src}/>
         </div>
         <div className="flex flex-col justify-center">
-          <button className="p-1 bg-indigo-500 rounded-md w-32 ml-20 font-[Silkscreen]" onClick={createRoom}>New Game</button>
+          <button className="p-1 bg-indigo-500 rounded-md w-32 ml-15 font-[Silkscreen]" onClick={createRoom}>New Game</button>
           <div className="mt-7 flex gap-4 mb-5">
-            <input placeholder="Room Code" className="bg-white text-blue-600 p-1 rounded-md " onChange={(e) => {setCodeInput(e.target.value)}}></input>
+            <input placeholder="Room Code" className="font-[Silkscreen] bg-white text-blue-600 p-1 rounded-md w-32" onChange={(e) => {setCodeInput(e.target.value)}}></input>
             <button className= "p-1 bg-indigo-500 rounded-md font-[Silkscreen]" onClick={(joinRoom)}>Join Game</button>
           </div>
         </div>

@@ -76,7 +76,7 @@ export default function waitingRoom() {
                             <>
                                 <p className="text-center p-1 w-fit mr-5">{item.name}</p>
                                 {item.id === playerID && 
-                                    <button onClick={openEditName}><img className="w-5 h-5 font-[Silkscreen]" src={edit.src}></img></button>
+                                    <button onClick={openEditName}><img className="w-5 h-5 font-[Silkscreen] rounded w-fit" src={edit.src}></img></button>
                                 }
                             </>
                         }
