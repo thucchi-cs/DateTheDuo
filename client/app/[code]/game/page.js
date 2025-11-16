@@ -237,7 +237,7 @@ export default function game() {
                     {!correct &&
                         <p className="absolute font-[Silkscreen] text-red-600 text-8xl top-70 left-160">{answered}</p>
                     }
-                    <button className ="absolute font-[Silkscreen] p-1 rounded w-fit bg-indigo-600 z-20 text-2xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
+                    <button className ="absolute font-[Silkscreen] bottom-40 right-165 p-1 rounded w-fit bg-indigo-600 z-20 text-9xl transition duration-150 ease-in-out hover:bg-indigo-500 shadow-x" onClick={newQuestion}>Next!</button>
                 </div>
             }
             {(stage === "reaction") &&
