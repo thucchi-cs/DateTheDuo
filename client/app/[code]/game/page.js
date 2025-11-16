@@ -2,11 +2,8 @@
 import { useState, useEffect } from "react";
 import angryDuo from "../../images/angryDuo.PNG";
 import chadDuo from "../../images/chadDuo.png";
-import dateDuo from "../../images/dateDuo.png";
-import fancyDuo from "../../images/fancyDuo.png";
 import inloveDuo from "../../images/inloveDuo.PNG";
 import wowzaDuo from "../../images/wowzaDuo.PNG";
-import stage from "../../images/stage.png";
 import introScreen from "../../images/introScreen.png";
 import questionBank from '../../images/questionBank.png';
 import spotlight from '../../images/spotlight.png';
